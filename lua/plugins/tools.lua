@@ -53,4 +53,42 @@ return {
       { "<leader>Be", '<cmd>lua require("base64").encode()<cr>', desc = "base64 encode", mode = "x" },
     },
   },
+  {
+    "git@github.com:Operdies/gwatch.nvim.git",
+    keys = {
+      { "<leader>ct", '<cmd>lua require("gwatch").toggle()<cr>', desc = "Toggle Gwatch", mode = "n" },
+      { "<leader>cs", '<cmd>lua require("gwatch").start()<cr>', desc = "Start Gwatch", mode = "n" },
+      { "<leader>cx", '<cmd>lua require("gwatch").stop()<cr>', desc = "Stop Gwatch", mode = "n" },
+    },
+    opts = {
+      -- The width of the UI window
+      windowWidth = 50,
+      -- Options in this block are the default independent of language
+      default = {
+        -- Check the output of `gwatch --help` for specific information about flags
+        eventMask = "write",
+        mode = "kill",
+        patterns = "**",
+        -- %e and %f respectively expand to the event, and the file it affected
+        command = "echo %e %f",
+      },
+      -- Settings for a specific filetype override default settings
+      lang = {
+        c = {
+          patterns = "**.c",
+          command = "make run",
+        },
+        go = {
+          patterns = { "**.go", "go.mod" },
+          -- Not using 'go run .' because that doesn't return the actual running process PID.
+          -- gwatch will be unable to kill spawned instances of the process.
+          command = "go build -o ./out .; ./out",
+        },
+        rust = {
+          patterns = { "**.rs", "Cargo.toml" },
+          command = "cargo run --quiet",
+        },
+      },
+    },
+  },
 }

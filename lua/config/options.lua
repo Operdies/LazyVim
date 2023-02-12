@@ -26,3 +26,4 @@ vim.opt.wrap = true -- display lines as one long line
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.wo.foldmethod = 'expr'
+vim.opt.relativenumber = false

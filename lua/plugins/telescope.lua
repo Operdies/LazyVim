@@ -73,7 +73,7 @@ return {
     keys = {
       {
         "<leader>fp",
-        "<cmd>Telescope reprosjession root_dir=" .. vim.loop.os_homedir() .. "/Repositories<cr>",
+        "<cmd>Telescope reprosjession root_dir=" .. vim.loop.os_homedir() .. "/repos<cr>",
         desc = "Projects",
       },
     },

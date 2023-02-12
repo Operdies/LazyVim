@@ -7,7 +7,7 @@ vim.keymap.del("t", "<esc><esc>")
 vim.keymap.del("n", "<leader>gG")
 
 local map = vim.keymap.set
-local opts = {}
+local opts = { silent = true }
 
 map("n", "<tab>", ":bnext<cr>", opts)
 map("n", "<s-tab>", ":bprev<cr>", opts)
