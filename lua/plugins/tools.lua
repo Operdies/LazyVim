@@ -54,7 +54,7 @@ return {
     },
   },
   {
-    "git@github.com:Operdies/gwatch.nvim.git",
+    "Operdies/gwatch.nvim",
     keys = {
       { "<leader>ct", '<cmd>lua require("gwatch").toggle()<cr>', desc = "Toggle Gwatch", mode = "n" },
       { "<leader>cs", '<cmd>lua require("gwatch").start()<cr>', desc = "Start Gwatch", mode = "n" },
@@ -76,17 +76,17 @@ return {
       lang = {
         c = {
           patterns = "**.c",
-          command = "make run",
+          command = "clear; make run",
         },
         go = {
           patterns = { "**.go", "go.mod" },
           -- Not using 'go run .' because that doesn't return the actual running process PID.
           -- gwatch will be unable to kill spawned instances of the process.
-          command = "go build -o ./out .; ./out",
+          command = "clear; go build -o ./out .; ./out",
         },
         rust = {
           patterns = { "**.rs", "Cargo.toml" },
-          command = "cargo run --quiet",
+          command = "clear; cargo run",
         },
       },
     },
