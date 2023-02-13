@@ -27,7 +27,7 @@ require("lazy").setup({
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
   dev = {
-    path = "~/Repositories/GitHub",
+    path = "~/repos",
     ---@type string[]
     patterns = {},
   },

@@ -60,10 +60,11 @@ return {
       { "<leader>ct", '<cmd>lua require("gwatch").toggle()<cr>', desc = "Toggle Gwatch", mode = "n" },
       { "<leader>cs", '<cmd>lua require("gwatch").start()<cr>', desc = "Start Gwatch", mode = "n" },
       { "<leader>cx", '<cmd>lua require("gwatch").stop()<cr>', desc = "Stop Gwatch", mode = "n" },
+      { "<leader>cc", '<cmd>lua require("gwatch").reload()<cr>', desc = "Reload Gwatch", mode = "n" },
     },
     opts = {
       -- The width of the UI window
-      windowWidth = 50,
+      windowWidth = 80,
       -- Options in this block are the default independent of language
       default = {
         -- Check the output of `gwatch --help` for specific information about flags

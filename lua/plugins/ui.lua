@@ -17,6 +17,7 @@ return {
     config = function()
       require("scope").setup()
     end,
-    event = "VeryLazy"
+    event = "VeryLazy",
   },
+  { "folke/noice.nvim", opts = { messages = { enabled = false } } },
 }
