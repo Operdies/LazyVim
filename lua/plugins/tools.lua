@@ -75,6 +75,12 @@ return {
       },
       -- Settings for a specific filetype override default settings
       lang = {
+        lua = {
+          patterns = "**.lua",
+          callback = function()
+            require("sniprun").run("n")
+          end,
+        },
         c = {
           patterns = "**.c",
           command = "clear; make run",
