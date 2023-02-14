@@ -55,6 +55,7 @@ return {
   },
   {
     "Operdies/gwatch.nvim",
+    dev = true,
     keys = {
       { "<leader>ct", '<cmd>lua require("gwatch").toggle()<cr>', desc = "Toggle Gwatch", mode = "n" },
       { "<leader>cs", '<cmd>lua require("gwatch").start()<cr>', desc = "Start Gwatch", mode = "n" },

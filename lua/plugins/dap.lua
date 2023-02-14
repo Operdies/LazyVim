@@ -23,11 +23,36 @@ return {
           type = "netcoredbg",
           name = "attach - netcoredbg",
           request = "attach",
-          processId = require('dap.utils').pick_process,
+          processId = require("dap.utils").pick_process,
+        },
+      }
+      dap.adapters.codelldb = {
+        type = "server",
+        port = "${port}",
+        executable = {
+          command = "codelldb",
+          args = { "--port", "${port}" },
+        },
+      }
+      dap.configurations.rust = {
+        {
+          name = "Launch file",
+          type = "codelldb",
+          request = "launch",
+          program = function()
+            local cwd = vim.fn.getcwd()
+            local path = cwd .. "/target/debug/" .. vim.fn.fnamemodify(cwd, ":t")
+            if vim.fn.executable(path) == 0 then
+              vim.notify("Path " .. path .. " is not executable")
+            end
+            return path
+          end,
+          cwd = "${workspaceFolder}",
+          stopOnEntry = false,
         },
       }
 
-      dapui.setup {}
+      dapui.setup({})
 
       vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
 
@@ -58,6 +83,6 @@ return {
       { "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", desc = "toggle ui" },
       { "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", desc = "terminate" },
       { "<leader>dk", "<cmd>lua require('dap.ui.widgets').hover()<cr>", desc = "hover" },
-    }
+    },
   },
 }
