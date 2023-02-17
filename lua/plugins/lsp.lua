@@ -13,10 +13,23 @@ return {
           filetypes = { "helm" },
           mason = false,
         },
+        rust_analyzer = {
+          settings = {
+            ["rust-analyzer"] = {
+              diagnostics = {
+                enable = true,
+                -- There is a bug in rust-analyzer causing this to trigger constantly. 
+                -- TODO: Check if this is fixed at some point
+                disabled = { "unresolved-proc-macro" },
+                enableExperimental = true,
+              },
+            },
+          },
+        },
         omnisharp = {
           filetypes = { "cs", "csx" },
           root_dir = function(fname)
-            if fname:sub(- #".csx") == ".csx" then
+            if fname:sub(-#".csx") == ".csx" then
               return require("lspconfig").util.path.dirname(fname)
             end
             return vim.fn.getcwd()
@@ -42,26 +55,58 @@ return {
         end,
         omnisharp = function(_, opts)
           opts.handlers = {
-            ["textDocument/definition"] = require('omnisharp_extended').handler,
+            ["textDocument/definition"] = require("omnisharp_extended").handler,
           }
           require("lazyvim.util").on_attach(function(client, _)
             -- INFO https://github.com/OmniSharp/omnisharp-roslyn/issues/2483
             if client.name == "omnisharp" then
               client.server_capabilities.semanticTokensProvider.legend = {
                 tokenModifiers = { "static" },
-                tokenTypes = { "comment", "excluded", "identifier", "keyword", "keyword", "number", "operator",
-                  "operator", "preprocessor", "string", "whitespace", "text", "static", "preprocessor", "punctuation",
-                  "string", "string", "class", "delegate", "enum", "interface", "module", "struct", "typeParameter",
-                  "field", "enumMember", "constant", "local", "parameter", "method", "method", "property", "event",
-                  "namespace", "label", "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml",
-                  "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml", "xml", "regexp", "regexp", "regexp",
-                  "regexp", "regexp", "regexp", "regexp", "regexp", "regexp" }
+                tokenTypes = {
+                  "comment",
+                  "excluded",
+                  "identifier",
+                  "keyword",
+                  "keyword",
+                  "number",
+                  "operator",
+                  "operator",
+                  "preprocessor",
+                  "string",
+                  "whitespace",
+                  "text",
+                  "static",
+                  "preprocessor",
+                  "punctuation",
+                  "string",
+                  "string",
+                  "class",
+                  "delegate",
+                  "enum",
+                  "interface",
+                  "module",
+                  "struct",
+                  "typeParameter",
+                  "field",
+                  "enumMember",
+                  "constant",
+                  "local",
+                  "parameter",
+                  "method",
+                  "method",
+                  "property",
+                  "event",
+                  "namespace",
+                  "label",
+                  "xml",
+                  "regexp",
+                },
               }
             end
           end)
           return false
-        end
-      }
-    }
+        end,
+      },
+    },
   },
 }

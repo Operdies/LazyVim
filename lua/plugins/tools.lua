@@ -69,7 +69,7 @@ return {
       default = {
         -- Check the output of `gwatch --help` for specific information about flags
         eventMask = "write",
-        mode = "kill",
+        mode = "block",
         patterns = "**",
         -- %e and %f respectively expand to the event, and the file it affected
         command = "echo %e %f",
@@ -94,7 +94,7 @@ return {
         },
         rust = {
           patterns = { "**.rs", "Cargo.toml" },
-          command = "clear; cargo run",
+          command = "cargo run",
         },
       },
     },
