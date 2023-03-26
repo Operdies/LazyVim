@@ -4,7 +4,7 @@ return {
     cmd = "ToggleTerm",
     config = function(_, opts)
       function _G.set_terminal_keymaps()
-        local keymap_opts = { noremap = true }
+        local keymap_opts = { noremap = false }
         vim.api.nvim_buf_set_keymap(0, "t", "<C-w>", [[<C-\><C-n>]], keymap_opts)
         vim.api.nvim_buf_set_keymap(0, "t", "<C-w>i", [[<C-\><C-n>]], keymap_opts)
         vim.api.nvim_buf_set_keymap(0, "t", "<C-w>c", [[<C-\><C-n><C-W>c]], keymap_opts)
@@ -20,16 +20,11 @@ return {
       toggleterm.setup(opts)
     end,
     keys = {
-      { "<leader><cr>", "<cmd>ToggleTerm<CR>", desc = "Terminal" },
+      { "<c-\\>" },
       {
         "<leader>gg",
-        "<cmd>lua require'toggleterm.terminal'.Terminal:new({ cmd = 'lazygit', hidden = true, direction = 'float' }):toggle()<CR>",
+        function() require'toggleterm.terminal'.Terminal:new({ cmd = 'lazygit', hidden = true, direction = 'float' }):toggle() end,
         desc = "lazygit",
-      },
-      {
-        "<leader><cr>d",
-        "<cmd>lua require'toggleterm.terminal'.Terminal:new({ cmd = 'lazydocker', hidden = true, direction = 'float', dir='%:p:h' }):toggle()<CR>",
-        desc = "lazydocker",
       },
     },
     opts = {

@@ -18,7 +18,7 @@ return {
             ["rust-analyzer"] = {
               diagnostics = {
                 enable = true,
-                -- There is a bug in rust-analyzer causing this to trigger constantly. 
+                -- There is a bug in rust-analyzer causing this to trigger constantly.
                 -- TODO: Check if this is fixed at some point
                 disabled = { "unresolved-proc-macro" },
                 enableExperimental = true,
@@ -37,6 +37,9 @@ return {
         },
       },
       setup = {
+        clangd = function(_, opts)
+          opts.capabilities.offsetEncoding = { "utf-16" }
+        end,
         helm_ls = function(_, _)
           local configs = require("lspconfig.configs")
           if not configs.helm_ls then

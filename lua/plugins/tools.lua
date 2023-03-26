@@ -61,10 +61,13 @@ return {
       { "<leader>cs", '<cmd>lua require("gwatch").start()<cr>', desc = "Start Gwatch", mode = "n" },
       { "<leader>cx", '<cmd>lua require("gwatch").stop()<cr>', desc = "Stop Gwatch", mode = "n" },
       { "<leader>cc", '<cmd>lua require("gwatch").reload()<cr>', desc = "Reload Gwatch", mode = "n" },
+      { "<leader>c,", '<cmd>lua require("gwatch").settings()<cr>', desc = "Override Settings", mode = "n" },
     },
     opts = {
       -- The width of the UI window
-      windowWidth = 80,
+      ["window width"] = 80,
+      ["window height"] = 20,
+      ["window position"] = "bottom",
       -- Options in this block are the default independent of language
       default = {
         -- Check the output of `gwatch --help` for specific information about flags
@@ -76,15 +79,16 @@ return {
       },
       -- Settings for a specific filetype override default settings
       lang = {
-        lua = {
-          patterns = "**.lua",
-          callback = function()
-            require("sniprun").run("n")
-          end,
-        },
+        -- lua = {
+        --   patterns = "**.lua",
+        --   callback = function()
+        --     require("sniprun").run("n")
+        --   end,
+        -- },
         c = {
-          patterns = "**.c",
-          command = "clear; make run",
+          patterns = { "**.c", "Makefile" },
+          command = "make",
+          mode = "block",
         },
         go = {
           patterns = { "**.go", "go.mod" },
@@ -93,8 +97,10 @@ return {
           command = "clear; go build -o ./out .; ./out",
         },
         rust = {
+          mode = "kill",
           patterns = { "**.rs", "Cargo.toml" },
-          command = "cargo run",
+          -- command = "cargo test -- --nocapture",
+          command = "cargo run"
         },
       },
     },
