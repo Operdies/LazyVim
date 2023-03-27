@@ -73,6 +73,7 @@ return {
     lazy = false,
   },
   {
+    enabled = "false",
     "rmagatti/auto-session",
     event = "VimEnter",
     opts = {
