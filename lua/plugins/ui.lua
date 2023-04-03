@@ -7,7 +7,7 @@ return {
     end,
     opts = {
       bold = false,
-      italic = false,
+      -- italic = false,
       contrast = "hard",
       invert_tabline = true,
     },
