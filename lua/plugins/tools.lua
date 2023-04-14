@@ -62,6 +62,7 @@ return {
       { "<leader>cx", '<cmd>lua require("gwatch").stop()<cr>', desc = "Stop Gwatch", mode = "n" },
       { "<leader>cc", '<cmd>lua require("gwatch").reload()<cr>', desc = "Reload Gwatch", mode = "n" },
       { "<leader>c,", '<cmd>lua require("gwatch").settings()<cr>', desc = "Override Settings", mode = "n" },
+      { "<C-q>", '<cmd>lua require("gwatch").trigger()<cr>', desc = "Manually trigger gwatch", mode = "n" },
     },
     opts = {
       -- The width of the UI window

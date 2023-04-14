@@ -16,6 +16,10 @@ return {
         rust_analyzer = {
           settings = {
             ["rust-analyzer"] = {
+              ---@diagnostic disable-next-line: assign-type-mismatch
+              checkOnSave = {
+                command = "clippy",
+              },
               diagnostics = {
                 enable = true,
                 -- There is a bug in rust-analyzer causing this to trigger constantly.
@@ -55,6 +59,20 @@ return {
             }
           end
           return false
+        end,
+        tailwindcss = function()
+          require("lazyvim.util").on_attach(function(client, _)
+            if client.name == "tailwindcss" then
+              client.server_capabilities.documentFormattingProvider = true
+            end
+          end)
+        end,
+        eslint = function()
+          require("lazyvim.util").on_attach(function(client, _)
+            if client.name == "eslint" then
+              client.server_capabilities.documentFormattingProvider = true
+            end
+          end)
         end,
         omnisharp = function(_, opts)
           opts.handlers = {

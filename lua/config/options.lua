@@ -3,12 +3,12 @@
 -- Add any additional options here
 vim.filetype.add({
   extension = {
-    keymap = 'devicetree',
-    overlay = 'devicetree',
-    csx = 'csx',
-    cheat = 'bash',
-    hsh = 'hush'
-  }
+    keymap = "devicetree",
+    overlay = "devicetree",
+    csx = "csx",
+    cheat = "bash",
+    hsh = "hush",
+  },
 })
 vim.o.foldenable = true
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
@@ -24,6 +24,9 @@ vim.opt.undofile = true -- enable persistent undo
 -- vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.wrap = true -- display lines as one long line
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
-vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
-vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+vim.wo.foldmethod = "expr"
 vim.opt.relativenumber = false
+
+-- Set shiftwidth to 4 for csharp files
+vim.cmd([[autocmd FileType cs setlocal shiftwidth=4]])
