@@ -7,10 +7,10 @@ return {
     "folke/persistence.nvim",
     enabled = false,
   },
-  {
-    "neo-tree.nvim",
-    enabled = false,
-  },
+  -- {
+  --   "neo-tree.nvim",
+  --   enabled = false,
+  -- },
   {
     "hrsh7th/nvim-cmp",
     ---@param opts cmp.ConfigSchema

@@ -62,13 +62,13 @@ return {
       { "<leader>cx", '<cmd>lua require("gwatch").stop()<cr>', desc = "Stop Gwatch", mode = "n" },
       { "<leader>cc", '<cmd>lua require("gwatch").reload()<cr>', desc = "Reload Gwatch", mode = "n" },
       { "<leader>c,", '<cmd>lua require("gwatch").settings()<cr>', desc = "Override Settings", mode = "n" },
-      { "<C-q>", '<cmd>lua require("gwatch").trigger()<cr>', desc = "Manually trigger gwatch", mode = "n" },
+      { "<C-q>", '<cmd>lua require("gwatch").trigger()<cr>', desc = "Trigger gwatch run", mode = "n" },
     },
     opts = {
       -- The width of the UI window
       ["window width"] = 80,
       ["window height"] = 20,
-      ["window position"] = "bottom",
+      ["window position"] = "right",
       -- Options in this block are the default independent of language
       default = {
         -- Check the output of `gwatch --help` for specific information about flags
