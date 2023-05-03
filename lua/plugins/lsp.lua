@@ -4,10 +4,10 @@ return {
     dependencies = {
       "Hoffs/omnisharp-extended-lsp.nvim",
     },
-    opts = {
-      autoformat = false,
+    opts = function(_, opts)
+      opts.autoformat = false
       ---@type lspconfig.options
-      servers = {
+      opts.servers = {
         helm_ls = {
           cmd = { "helm_ls", "serve" },
           filetypes = { "helm" },
@@ -32,6 +32,25 @@ return {
         },
         omnisharp = {
           filetypes = { "cs", "csx" },
+          handlers = {
+            ["textDocument/definition"] = require("omnisharp_extended").handler,
+          },
+          on_attach = function(client, bufnr)
+            --INFO: https://github.com/OmniSharp/omnisharp-roslyn/issues/2483#issuecomment-1492605642
+            local tokenModifiers = client.server_capabilities.semanticTokensProvider.legend.tokenModifiers
+            for i, v in ipairs(tokenModifiers) do
+              local tmp = string.gsub(v, " ", "_")
+              tokenModifiers[i] = string.gsub(tmp, "-_", "")
+            end
+            local tokenTypes = client.server_capabilities.semanticTokensProvider.legend.tokenTypes
+            for i, v in ipairs(tokenTypes) do
+              local tmp = string.gsub(v, " ", "_")
+              tokenTypes[i] = string.gsub(tmp, "-_", "")
+            end
+            -- Use omnisharp_extended for decompilation
+            -- stylua: ignore
+            vim.keymap.set( "n", "gd", "<cmd>lua require('omnisharp_extended').telescope_lsp_definitions()<cr>", { buffer = bufnr, desc = "Goto Definition" })
+          end,
           root_dir = function(fname)
             if fname:sub(-#".csx") == ".csx" then
               return require("lspconfig").util.path.dirname(fname)
@@ -39,8 +58,8 @@ return {
             return vim.fn.getcwd()
           end,
         },
-      },
-      setup = {
+      }
+      opts.setup = {
         clangd = function(_, opts)
           opts.capabilities.offsetEncoding = { "utf-16" }
         end,
@@ -74,60 +93,7 @@ return {
             end
           end)
         end,
-        omnisharp = function(_, opts)
-          opts.handlers = {
-            ["textDocument/definition"] = require("omnisharp_extended").handler,
-          }
-          require("lazyvim.util").on_attach(function(client, _)
-            -- INFO https://github.com/OmniSharp/omnisharp-roslyn/issues/2483
-            if client.name == "omnisharp" then
-              client.server_capabilities.semanticTokensProvider.legend = {
-                tokenModifiers = { "static" },
-                tokenTypes = {
-                  "comment",
-                  "excluded",
-                  "identifier",
-                  "keyword",
-                  "keyword",
-                  "number",
-                  "operator",
-                  "operator",
-                  "preprocessor",
-                  "string",
-                  "whitespace",
-                  "text",
-                  "static",
-                  "preprocessor",
-                  "punctuation",
-                  "string",
-                  "string",
-                  "class",
-                  "delegate",
-                  "enum",
-                  "interface",
-                  "module",
-                  "struct",
-                  "typeParameter",
-                  "field",
-                  "enumMember",
-                  "constant",
-                  "local",
-                  "parameter",
-                  "method",
-                  "method",
-                  "property",
-                  "event",
-                  "namespace",
-                  "label",
-                  "xml",
-                  "regexp",
-                },
-              }
-            end
-          end)
-          return false
-        end,
-      },
-    },
+      }
+    end,
   },
 }
