@@ -8,7 +8,6 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "saadparwaiz1/cmp_luasnip",
-      "zbirenbaum/copilot-cmp",
     },
     opts = function()
       local cmp = require("cmp")
@@ -35,7 +34,6 @@ return {
           -- { name = "luasnip" },
           { name = "buffer" },
           { name = "path" },
-          { name = "copilot" },
         }),
         formatting = {
           format = function(_, item)
@@ -52,22 +50,6 @@ return {
           },
         },
       }
-    end,
-  },
-  -- Copilot setup
-  {
-    "zbirenbaum/copilot.lua",
-    event = "VeryLazy",
-    opts = {
-      suggestions = { enabled = false },
-      panel = { enabled = false },
-    },
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-    dependencies = { "zbirenbaum/copilot.lua" },
-    init = function()
-      require("copilot_cmp").setup()
     end,
   },
 }
