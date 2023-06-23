@@ -2,6 +2,13 @@ return {
   {
     "XXiaoA/auto-save.nvim",
     event = "BufReadPre",
+    keys = {
+      {
+        "<leader>ua",
+        "<cmd>ASToggle<cr>",
+        desc = "Toggle auto-save",
+      },
+    },
     opts = {
       condition = function(buf)
         local utils = require("auto-save.utils.data")
@@ -13,6 +20,7 @@ return {
             "picom.conf",
             "wezterm.lua",
           })
+          and not string.match(vim.fn.expand("%"), "^oil://")
       end,
       execution_message = {
         message = function()
@@ -73,7 +81,6 @@ return {
     lazy = false,
   },
   {
-    enabled = "false",
     "rmagatti/auto-session",
     event = "VimEnter",
     opts = {
@@ -84,6 +91,13 @@ return {
       auto_session_suppress_dirs = {
         "/home/*",
       },
+      bypass_session_save_file_types = { "alpha", "noice", "notify" },
+    },
+  },
+  {
+    "axkirillov/hbac.nvim",
+    opts = {
+      threshold = 7,
     },
   },
   {
