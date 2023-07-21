@@ -33,6 +33,9 @@ return {
         -- autocmd callback for before a char is inserted
         vim.api.nvim_create_autocmd("InsertCharPre", {
           callback = function(_)
+            if true then
+              return
+            end
             -- if no entry is selected do nothing
             if (cmp.get_selected_entry()) ~= nil then
               -- store the to-be-inserted char
@@ -40,12 +43,18 @@ return {
               -- clear the to-be-inserted char
               vim.v.char = ""
               -- vim schedule to circumvent `textlock`
-              vim.schedule(function()
+              local insertionCallback
+              insertionCallback = function()
                 -- confirm cmp selection - i. e. insert selected text
                 cmp.confirm({ select = false })
-                -- insert the stored char
-                vim.api.nvim_feedkeys(c, "n", false)
-              end)
+                -- insert the stored char. Char insertion may fail if it happens in a state where insertion is not allowed.
+                -- In that case, we reschedule the insertion.
+                local success, _ = pcall(vim.api.nvim_feedkeys, c, "n", false)
+                if not success then
+                  vim.schedule(insertionCallback)
+                end
+              end
+              vim.schedule(insertionCallback)
             end
           end,
           once = true,

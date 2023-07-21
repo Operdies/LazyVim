@@ -33,7 +33,7 @@ require("lazy").setup({
     ---@type string[]
     patterns = {},
   },
-  install = { colorscheme = { "gruvbox", "habamax" } },
+  install = { colorscheme = { "tokyonight-night", "habamax" } },
   checker = { enabled = false }, -- automatically check for plugin updates
   performance = {
     rtp = {

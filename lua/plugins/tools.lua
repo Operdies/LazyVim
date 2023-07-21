@@ -67,8 +67,9 @@ return {
     opts = {
       -- The width of the UI window
       ["window width"] = 80,
-      ["window height"] = 20,
-      ["window position"] = "right",
+      ["window height"] = 10,
+      ["window position"] = "bottom",
+      ["trigger"] = "hotkey",
       -- Options in this block are the default independent of language
       default = {
         -- Check the output of `gwatch --help` for specific information about flags
