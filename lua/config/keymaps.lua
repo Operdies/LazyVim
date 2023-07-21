@@ -3,7 +3,6 @@
 -- Add any additional keymaps here
 
 -- Override LazyVim defaults
-vim.keymap.del("t", "<esc><esc>")
 vim.keymap.del("n", "<leader>gG")
 
 local map = vim.keymap.set
@@ -11,3 +10,8 @@ local opts = { silent = true }
 
 map("n", "<tab>", ":bnext<cr>", opts)
 map("n", "<s-tab>", ":bprev<cr>", opts)
+
+-- Move caret to the last non-whitespace character in the line
+map("i", "<c-e>", "<c-o>A")
+-- Move caret to the first non-whitespace character in the line
+map("i", "<c-a>", "<c-o>I")
