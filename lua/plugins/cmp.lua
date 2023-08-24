@@ -17,14 +17,17 @@ return {
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
         ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-        ["<CR>"] = cmp.mapping.confirm({ select = false }),
+        ["<C-a>"] = cmp.mapping.abort(),
+        ["<C-e>"] = cmp.mapping.confirm({
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = true,
+        }),
       })
 
       -- Disable auto selection of first item in completion (2)
       opts.preselect = require("cmp").PreselectMode.None
 
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-        { name = "copilot" },
         { name = "nvim_lsp_signature_help" },
       }))
 
