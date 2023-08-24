@@ -102,4 +102,40 @@ return {
       },
     },
   },
+  {
+    "christoomey/vim-tmux-navigator",
+    init = function()
+      vim.g.tmux_navigator_no_mappings = 1
+    end,
+    keys = {
+      {
+        "<C-h>",
+        function()
+          vim.cmd([[TmuxNavigateLeft]])
+        end,
+        desc = "Tmux Left",
+      },
+      {
+        "<C-l>",
+        function()
+          vim.cmd([[TmuxNavigateRight]])
+        end,
+        desc = "Tmux Right",
+      },
+      {
+        "<C-k>",
+        function()
+          vim.cmd([[TmuxNavigateUp]])
+        end,
+        desc = "Tmux Up",
+      },
+      {
+        "<C-j>",
+        function()
+          vim.cmd([[TmuxNavigateDown]])
+        end,
+        desc = "Tmux Down",
+      },
+    },
+  },
 }
