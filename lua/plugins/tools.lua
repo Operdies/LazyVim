@@ -137,6 +137,8 @@ return {
         desc = "Tmux Down",
       },
     },
+  },
+  {
     "codethread/qmk.nvim",
     config = function()
       ---@type qmk.UserConfig
