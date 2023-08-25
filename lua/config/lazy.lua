@@ -35,7 +35,6 @@ require("lazy").setup({
     ---@type string[]
     patterns = {},
   },
-  install = { colorscheme = { "tokyonight-night", "habamax" } },
   checker = { enabled = false }, -- automatically check for plugin updates
   performance = {
     rtp = {

@@ -1,9 +1,5 @@
 return {
   {
-    "LazyVim/LazyVim",
-    opts = { colorscheme = "tokyonight-night" },
-  },
-  {
     "folke/persistence.nvim",
     enabled = false,
   },
