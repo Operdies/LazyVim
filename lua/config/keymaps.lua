@@ -13,5 +13,3 @@ map("n", "<s-tab>", ":bprev<cr>", opts)
 
 -- Move caret to the last non-whitespace character in the line
 map("i", "<c-e>", "<c-o>A")
--- Move caret to the first non-whitespace character in the line
-map("i", "<c-a>", "<c-o>I")
