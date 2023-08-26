@@ -3,13 +3,13 @@
 -- Add any additional keymaps here
 
 -- Override LazyVim defaults
-vim.keymap.del("n", "<leader>gG")
+pcall(vim.keymap.del, "n", "<leader>gG")
 
 local map = vim.keymap.set
 local opts = { silent = true }
 
-map("n", "<tab>", ":bnext<cr>", opts)
-map("n", "<s-tab>", ":bprev<cr>", opts)
 
--- Move caret to the last non-whitespace character in the line
-map("i", "<c-e>", "<c-o>A")
+-- Insert blank line before/after cursor and restore position
+map("n", "[<space>", "mlO<Esc>`l", opts)
+map("n", "]<space>", "mlo<Esc>`l", opts)
+

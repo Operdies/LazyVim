@@ -30,39 +30,6 @@ return {
     },
   },
   {
-    "monaqa/dial.nvim",
-    keys = {
-      {
-        "<C-a>",
-        function()
-          return require("dial.map").inc_normal()
-        end,
-        expr = true,
-        desc = "Increment",
-      },
-      {
-        "<C-x>",
-        function()
-          return require("dial.map").dec_normal()
-        end,
-        expr = true,
-        desc = "Decrement",
-      },
-    },
-    config = function()
-      local augend = require("dial.augend")
-      require("dial.config").augends:register_group({
-        default = {
-          augend.integer.alias.decimal,
-          augend.integer.alias.hex,
-          augend.date.alias["%Y/%m/%d"],
-          augend.constant.alias.bool,
-          augend.semver.alias.semver,
-        },
-      })
-    end,
-  },
-  {
     "chaoren/vim-wordmotion",
     init = function()
       vim.g.wordmotion_prefix = "<BS>"
@@ -79,26 +46,6 @@ return {
       vim.g.rooter_cd_cmd = "lcd"
     end,
     lazy = false,
-  },
-  {
-    "rmagatti/auto-session",
-    event = "VimEnter",
-    opts = {
-      log_level = "error",
-      cwd_change_handling = {
-        restore_upcoming_session = true,
-      },
-      auto_session_suppress_dirs = {
-        "/home/*",
-      },
-      bypass_session_save_file_types = { "alpha", "noice", "notify" },
-    },
-  },
-  {
-    "axkirillov/hbac.nvim",
-    opts = {
-      threshold = 7,
-    },
   },
   {
     "windwp/nvim-autopairs",

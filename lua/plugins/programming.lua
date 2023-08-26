@@ -1,12 +1,5 @@
 return {
   {
-    "MikaelElkiaer/yaml.nvim",
-    cmd = "YAMLYank",
-    keys = {
-      { "<leader>y", '<cmd>lua require("yaml_nvim").yank_all()<cr>', desc = "yank yaml key/value" },
-    },
-  },
-  {
     "iamcco/markdown-preview.nvim",
     build = function()
       vim.fn["mkdp#util#install"]()
@@ -17,7 +10,8 @@ return {
     { "towolf/vim-helm", ft = "helm" },
   },
   -- run tests based on context
-  { "vim-test/vim-test",
+  {
+    "vim-test/vim-test",
     cmd = { "TestClass", "TestFile", "TestLast", "TestNearest", "TestSuite", "TestVisit" },
     init = function()
       vim.g["test#csharp#runner"] = "dotnettest"
@@ -32,21 +26,6 @@ return {
       { "<leader>ts", "<cmd>TestSuite<CR>", desc = "suite" },
       { "<leader>tl", "<cmd>TestLast<CR>", desc = "last" },
       { "<leader>tv", "<cmd>TestVisit<CR>-\\><C-n><C-w>l", desc = "visit" },
-    },
-  },
-  -- generate c# xml doc
-  {
-    "danymat/neogen",
-    cmd = { "Neogen" },
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    opts = {
-      languages = {
-        cs = {
-          template = {
-            annotation_convention = "xmldoc"
-          }
-        }
-      }
     },
   },
 }
